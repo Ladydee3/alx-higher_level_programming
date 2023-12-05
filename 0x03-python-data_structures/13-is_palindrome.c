@@ -42,12 +42,12 @@ int is_palindrome(listint_t **head)
 	{
 		if ((*head)->n != aux2->n)
 		{
-			print_listint(aux);
+			free_listint(aux);
 			return (0);
 		}
 		*head = (*head)->next;
 		aux2 = aux2->next;
 	}
-	print_listint(aux);
+	free_listint(aux);
 	return (1);
 }
