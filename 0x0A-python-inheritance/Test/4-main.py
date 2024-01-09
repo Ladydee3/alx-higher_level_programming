@@ -1,4 +1,3 @@
-guillaume@ubuntu:~/0x0A$ cat 4-main.py
 #!/usr/bin/python3
 inherits_from = __import__('4-inherits_from').inherits_from
 
@@ -9,4 +8,3 @@ if inherits_from(a, bool):
     print("{} inherited from class {}".format(a, bool.__name__))
 if inherits_from(a, object):
     print("{} inherited from class {}".format(a, object.__name__))
-
