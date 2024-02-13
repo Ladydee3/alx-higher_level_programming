@@ -26,9 +26,9 @@ int main(void)
     add_nodeint(&head, 1024);
     print_listint(head);
 
-    if (check_cycle(head) == 0)
+    if (check_cyclo(head) == 0)
         printf("Linked list has no cycle\n");
-    else if (check_cycle(head) == 1)
+    else if (check_cyclo(head) == 1)
         printf("Linked list has a cycle\n");
 
     current = head;
@@ -37,9 +37,9 @@ int main(void)
     temp = current->next;
     current->next = head;
 
-    if (check_cycle(head) == 0)
+    if (check_cyclo(head) == 0)
         printf("Linked list has no cycle\n");
-    else if (check_cycle(head) == 1)
+    else if (check_cyclo(head) == 1)
         printf("Linked list has a cycle\n");
 
     current = head;
