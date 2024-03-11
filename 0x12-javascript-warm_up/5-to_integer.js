@@ -1,5 +1,8 @@
 #!/usr/bin/node
-if (parsedVal(process.argv[2]) || process.argv[2] === undefine) {
-	console.log('Not a number');
+
+const parsedVal = parseInt(process.argv[2]);
+if (!isNaN(parsedVal)) {
+  console.log(`My number: ${parsedVal}`);
 } else {
-	console.log('my number:', parserInt(process.argv[2]));}
+  console.log('Not a number');
+}
