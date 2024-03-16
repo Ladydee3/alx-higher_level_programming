@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """
-List all State objects
+List all State objects with a
 """
 if __name__ == "__main__":
     import sys
     from model_state import Base, State
-    from sqlalchemy import create_engine
+    from sqlalchemy import create_engine, func
     from sqlalchemy.orm import sessionmaker
+    from sqlalchemy.sql import insert, update
 
     mysql = 'mysql+mysqldb://{}:{}@localhost:3306/{}'.format(sys.argv[1],
                                                              sys.argv[2],
@@ -15,8 +16,6 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    first = session.query(State).first()
-    if first is None:
-        print("Nothing")
-    else:
-        print("{:d}: {:s}".format(first.id, first.name))
+    session.query(State).filter(State.id == 2).update({'name': 'New Mexico'})
+    session.commit()
+    session.flush()

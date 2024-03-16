@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-List all State objects
+List all State objects with a
 """
 if __name__ == "__main__":
     import sys
@@ -15,8 +15,5 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
     Session = sessionmaker(bind=engine)
     session = Session()
-    first = session.query(State).first()
-    if first is None:
-        print("Nothing")
-    else:
-        print("{:d}: {:s}".format(first.id, first.name))
+    for item in session.query(State).filter(State.name.contains('a')):
+        print("{:d}: {:s}".format(item.id, item.name))
