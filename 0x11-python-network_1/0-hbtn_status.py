@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+""" A script that fetches http://intranet.hbtn.io/status."""
+import urllib.request
+
+
+def main():
+    """
+    function to print a response of  a specific url
+    """
+    url = 'https://intranet.htbn.io/status'
+    with urllib.request.urlopen(url) as response:
+        html = response.read()
+        print("body respond:") 
+        print("\t- type: {}".format(type(body)))
+        print("\t- contect: {}".format(body))
+        print("\t- utf8 content: {}".format(body.decode("utf-8")))
+
+        if__name__ == "+__main__":
+            main()
