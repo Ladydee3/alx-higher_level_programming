@@ -4,7 +4,7 @@
 Usage: ./2-post_email.py <URL> <email>
     - Displays the body of the response.
     """
-    from sys
+    import  sys
     import urllib.parse
     import urllib.request
 
