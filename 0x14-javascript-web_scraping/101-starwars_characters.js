@@ -1,36 +1,25 @@
 #!/usr/bin/node
 const request = require('request');
-
-const movieId = process.argv[2];
-const baseUrl = 'https://swapi-api.alx-tools.com/api/films/';
-const fullUrl = baseUrl.concat(movieId);
-
-request(fullUrl, (error, response, body) => {
-  if (!error) {
+const endPoint = 'http://swapi-api.hbtn.io/api/films/' + process.argv[2];
+request.get(endPoint, function (err, response, body) {
+  if (err) {
+    throw err;
+  } else if (response.statusCode === 200) {
     const characters = JSON.parse(body).characters;
-    // Create a variable to store the number of characters processed
-    let charactersProcessed = 0;
-    // Create an empty array to store the character names
-    const characterNames = [];
-    characters.forEach((characterUrl) => {
-      request(characterUrl, (error, response, body) => {
-        if (!error) {
-          const charName = JSON.parse(body).name;
-          // Add the character name to the array
-          characterNames.push(charName);
-        }
-        // Increment the charactersProcessed variable
-        charactersProcessed++;
-        // Check if all characters have been processed
-        if (charactersProcessed === characters.length) {
-          // Log the character names when all characters have been processed
-          characterNames.forEach((actor) => {
-            console.log(actor);
-          });
-        }
-      });
+    const l = [];
+    characters.forEach(character => {
+      l.push(new Promise((resolve, reject) => {
+        request.get(character, function (err, response, body) {
+          if (err) {
+            reject(err);
+          } else if (response.statusCode === 200) {
+            resolve(JSON.parse(body).name);
+          }
+        });
+      }));
     });
-  } else {
-    console.log(error);
+    Promise.all(l).then(names => {
+      names.forEach(name => console.log(name));
+    });
   }
 });
